@@ -33,4 +33,12 @@ python app.py
 
 2. Send requests to the following endpoints using a browser or an API development tool.
 
+## Testing
 
+This API can be tested with the following command.
+
+```bash
+pytest -s
+```
+
+The test is managed by `tests/test_data.json` and test cases can be modified and added.
