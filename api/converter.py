@@ -22,7 +22,7 @@ def markdown_to_marp(markdown_text, page_split=2):
     return marp_text
 
 def marp_to_markdown(marp_text):
-    output = ""
+    markdown_text = ""
 
     lines = marp_text.split("\n")
     new_lines = []
@@ -42,20 +42,20 @@ def marp_to_markdown(marp_text):
                 start_code_block = True 
                 
         else:
-            if start_code_block:
+            if start_code_block:                     # コードブロックを取得
                 code_block_content.append(lines[i])
             else:
                 new_lines.append(lines[i])
 
     for s in new_lines:   
         if not isinstance(s, str): #コードブロック
-            output += "\n".join(s)
+            markdown_text += "\n".join(s)
         else:
             s = s.strip()
             if not check_marp_style(s) and s != "": # marp styleを消除
-                output += s + "\n\n"
+                markdown_text += s + "\n\n"
 
-    return output
+    return markdown_text
 
 # marpのTweak styleをチェック
 def check_marp_style(text):
