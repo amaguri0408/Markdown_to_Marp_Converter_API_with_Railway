@@ -11,7 +11,7 @@ This API provides functionality to convert Markdown and Marp data back and forth
 ## Installation
 
 ```bash
-git clone https://github.com/your-username/api-repo.git
+git clone https://github.com/kaneko1102/Markdown_to_Marp_Converter_API.git
 cd Markdown_to_Marp_Converter_API
 ```
 
