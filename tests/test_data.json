@@ -1,2 +1,44 @@
 {
+    "paths": {
+        "/api/v1/marp": {
+            "post": [
+                {
+                    "request_body": {
+                        "raw_body": "# Hello, world!\n\n## Marp\n\nMarkdown + Marp = Beautiful slide deck\n"
+                    },
+                    "expected_status_code": 200,
+                    "expected_response": {
+                        "raw_body": "# Hello, world!\n\n---\n\n## Marp\n\nMarkdown + Marp = Beautiful slide deck\n\n"
+                    }
+                }
+            ] 
+        },
+        "/api/v1/markdown": {
+            "post": [
+                {
+                    "request_body": {
+                        "raw_body": "# Hello, world!\n\n---\n\n## Marp\n\nMarkdown + Marp = Beautiful slide deck\n"
+                    },
+                    "expected_status_code": 200,
+                    "expected_response": {
+                        "raw_body": "# Hello, world!\n\n## Marp\n\nMarkdown + Marp = Beautiful slide deck\n\n"
+                    }
+                }
+            ]
+        },
+        "/api/v1/theme": {
+            "post": [
+                {
+                    "request_body": {
+                        "raw_body": "---\ntheme: gaia\n---\n\n# Hello, world!\n\n---\n\n## Marp\n\nMarkdown + Marp = Beautiful slide deck\n",
+                        "theme": "uncover"
+                    },
+                    "expected_status_code": 200,
+                    "expected_response": {
+                        "raw_body": "---\ntheme: uncover\n---\n\n# Hello, world!\n\n---\n\n## Marp\n\nMarkdown + Marp = Beautiful slide deck\n"
+                    }
+                }
+            ]
+        }
+    }
 }

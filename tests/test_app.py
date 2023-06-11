@@ -5,6 +5,7 @@ from pathlib import Path
 
 # path追加
 sys.path.append(str(Path(__file__).parent.parent))
+sys.path.append(str(Path(__file__).parent))
 
 from app import app
 
@@ -44,3 +45,8 @@ def test_api(client):
                     print(f'[{method}] {url}: ', end='')
                     check_response(client, method, url, test['request_body'], test['expected_status_code'], test['expected_response'])
                     print('OK')
+
+
+if __name__ == '__main__':
+    pytest.main(['-v', __file__])
+    

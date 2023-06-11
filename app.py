@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify
 
+from api.converter import markdown_to_marp, marp_to_markdown
+from api.change_theme import change_theme
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -7,44 +10,39 @@ def home():
     return 'API is running'
 
 @app.route('/api/v1/marp', methods=['POST'])
-def convert_to_marp():
+def convert_to_marp_api():
     # リクエストボディの取得
     data = request.json
     raw_body = data['raw_body']
 
-    # Marpへの変換処理を実装
-
     # レスポンスの作成
     response = {
-        'raw_body': raw_body  # 変換後のMarpデータを設定
+        'raw_body': markdown_to_marp(raw_body)  # 変換後のMarpデータを設定
     }
     return jsonify(response), 200
 
 @app.route('/api/v1/markdown', methods=['POST'])
-def convert_to_markdown():
+def convert_to_markdown_api():
     # リクエストボディの取得
     data = request.json
     raw_body = data['raw_body']
 
-    # Markdownへの変換処理を実装
-
     # レスポンスの作成
     response = {
-        'raw_body': raw_body  # 変換後のMarkdownデータを設定
+        'raw_body': marp_to_markdown(raw_body)  # 変換後のMarkdownデータを設定
     }
     return jsonify(response), 200
 
 @app.route('/api/v1/theme', methods=['POST'])
-def change_theme():
+def change_theme_api():
     # リクエストボディの取得
     data = request.json
     raw_body = data['raw_body']
-
-    # テーマ変更処理を実装
+    theme = data['theme']
 
     # レスポンスの作成
     response = {
-        'raw_body': raw_body  # テーマ変更後のMarpデータを設定
+        'raw_body': change_theme(raw_body, theme)  # テーマ変更後のMarpデータを設定
     }
     return jsonify(response), 200
 
