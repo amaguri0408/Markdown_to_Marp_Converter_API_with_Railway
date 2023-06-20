@@ -107,25 +107,24 @@ def export_md_to_html_api():
 
     md_export(raw_body)
 
-    downloadFileName = 'api/mapr_export.html'
-    downloadFile = 'marp_export.html'
+    downloadFileName = 'api/md_export.html'
+    downloadFile = 'md_export.html'
 
-    # ★ポイント3
     return send_file(downloadFile, as_attachment = True, \
         attachment_filename = downloadFileName)
 
 @app.route('/api/v1/marp_export', methods=['POST'])
 @cross_origin()
 def export_marp_to_html_api():
+    # リクエストボディの取得
     data = request.json
     raw_body = data['raw_body']
 
     marp_export(raw_body)
-    
-    downloadFileName = 'api/mapr_export.html'
+
+    downloadFileName = 'api/marp_export.html'
     downloadFile = 'marp_export.html'
 
-    # ★ポイント3
     return send_file(downloadFile, as_attachment = True, \
         attachment_filename = downloadFileName)
 
