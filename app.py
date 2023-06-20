@@ -9,6 +9,9 @@ from flask_cors import CORS, cross_origin
 from api.converter import markdown_to_marp, marp_to_markdown
 from api.change_theme import change_theme
 
+from api.data_export import md_export
+from api.data_export import marp_export
+
 app = Flask(__name__)
 
 # config
@@ -94,6 +97,37 @@ def change_theme_api():
         'raw_body': change_theme(raw_body, theme)  # テーマ変更後のMarpデータを設定
     }
     return jsonify(response), 200
+
+@app.route('/api/v1/md_export', methods=['POST'])
+@cross_origin()
+def export_md_to_html_api():
+    # リクエストボディの取得
+    data = request.json
+    raw_body = data['raw_body']
+
+    md_export(raw_body)
+
+    downloadFileName = 'api/mapr_export.html'
+    downloadFile = 'marp_export.html'
+
+    # ★ポイント3
+    return send_file(downloadFile, as_attachment = True, \
+        attachment_filename = downloadFileName)
+
+@app.route('/api/v1/marp_export', methods=['POST'])
+@cross_origin()
+def export_marp_to_html_api():
+    data = request.json
+    raw_body = data['raw_body']
+
+    marp_export(raw_body)
+    
+    downloadFileName = 'api/mapr_export.html'
+    downloadFile = 'marp_export.html'
+
+    # ★ポイント3
+    return send_file(downloadFile, as_attachment = True, \
+        attachment_filename = downloadFileName)
 
 
 if __name__ == '__main__':
