@@ -1,5 +1,5 @@
 import markdown
-import pdfkit # wkhtmltopdfのインストールが必要 https://wkhtmltopdf.org/downloads.html
+# import pdfkit # wkhtmltopdfのインストールが必要 https://wkhtmltopdf.org/downloads.html
 import subprocess
 
 # md_text: markdown形式のテキスト
@@ -14,6 +14,7 @@ def md_export(md_text,data_format='html'):
     if data_format == 'html':
         with open('md_export.html','w') as f:
             f.write(html_text)
+        # return html_text
     
     options = {
      'page-size': 'A4',
@@ -33,12 +34,20 @@ def md_export(md_text,data_format='html'):
 # 動作にNode.jsが必要
 def marp_export(marp_text,data_format='html'):
     marp_file = 'marp_export.md'
-    with open(marp_file,'w') as f:
+    print(marp_file[:-2]+'html')
+    with open(marp_file,'w',encoding='utf-8') as f:
         f.write(marp_text)
     if data_format == 'html':
+        
         subprocess.run('npx @marp-team/marp-cli@latest '+ marp_file,shell=True)
+        # with open(marp_file[:-2]+'html','r') as f:
+            # html_text = f.read()
+            # print(marp_file[:-2]+'html')
+            # html_text = html_text.encode('cp932', "ignore")
+            # return html_text
     if data_format == 'pdf':
         subprocess.run('npx @marp-team/marp-cli@latest '+ marp_file+' --pdf',shell=True)
+    
 
 
 if __name__ == '__main__':
@@ -80,9 +89,13 @@ foobar
     """
     test_md_text = '# export\n- html\n- pdf\n\n## python'
     
-    md_export(test_md_text,'html')
-    md_export(test_md_text,'pdf')
-    
-    marp_export(test_marp_text,'html')
-    marp_export(test_marp_text,'pdf')
-
+    # html = md_export(test_md_text,'html')
+    # md_export(test_md_text,'pdf')
+    # print(html)
+    # marp_file = 'marp_export.md'
+    # print(marp_file[:-2]+'html')
+    html = marp_export(test_marp_text,'html')
+    # marp_export(test_marp_text,'pdf')
+    print(html)
+    # with open('test.html','w') as f:
+        # f.write(html)
