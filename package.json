@@ -1,0 +1,12 @@
+{
+  "name": "markdown_to_marp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.py",
+  "directories": {
+    "@marp-team/marp-cli": "^1.4.0"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^3.0.2"
+  }
+}
