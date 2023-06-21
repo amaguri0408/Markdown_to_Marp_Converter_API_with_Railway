@@ -3,7 +3,7 @@ import uuid
 import datetime
 from pathlib import Path
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS, cross_origin
 
 from api.converter import markdown_to_marp, marp_to_markdown
@@ -110,8 +110,7 @@ def export_md_to_html_api():
     downloadFileName = 'api/md_export.html'
     downloadFile = 'md_export.html'
 
-    return send_file(downloadFile, as_attachment = True, \
-        attachment_filename = downloadFileName)
+    return send_file(downloadFile, as_attachment = True)
 
 @app.route('/api/v1/marp_export', methods=['POST'])
 @cross_origin()
@@ -125,8 +124,7 @@ def export_marp_to_html_api():
     downloadFileName = 'api/marp_export.html'
     downloadFile = 'marp_export.html'
 
-    return send_file(downloadFile, as_attachment = True, \
-        attachment_filename = downloadFileName)
+    return send_file(downloadFile, as_attachment = True)
 
 
 if __name__ == '__main__':

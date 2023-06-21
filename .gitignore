@@ -1,4 +1,7 @@
 static/uploaded/*.png
+marp_export.html
+marp_export.md
+md_export.html
 
 
 # Byte-compiled / optimized / DLL files
